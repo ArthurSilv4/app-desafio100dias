@@ -27,10 +27,13 @@ public partial class NewChallenge : ContentPage
     {
         endDate.Date = startDate.Date.AddDays(nDiasDesafio);
 
+        var eventId = Guid.NewGuid();
+
         for (int i = 0; i < nDiasDesafio + 1; i++)
         {
             var newEvent = new EventModel
             {
+                Id = eventId,
                 Name = eventName.Text,
                 Description = eventDescription.Text,
                 StartDate = startDate.Date,
@@ -44,6 +47,25 @@ public partial class NewChallenge : ContentPage
         ClearInputs();
     }
 
+    private void OnDeleteEventClicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        var eventToRemove = button?.CommandParameter as EventModel;
+
+        if (eventToRemove != null)
+        {
+            var eventsToRemove = viewModel.Events
+                .SelectMany(kvp => kvp.Value.Cast<EventModel>())
+                .Where(ev => ev.Id == eventToRemove.Id)
+                .ToList();
+
+            foreach (var ev in eventsToRemove)
+            {
+                viewModel.RemoveEvent(ev);
+            }
+        }
+    }
+
     private void ClearInputs()
     {
         eventName.Text = string.Empty;
@@ -51,5 +73,4 @@ public partial class NewChallenge : ContentPage
         startDate.Date = DateTime.Now;
         endDate.Date = DateTime.Now.AddDays(nDiasDesafio);
     }
-    
 }

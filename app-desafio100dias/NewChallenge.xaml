@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cal="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar"
+             xmlns:viewModels="clr-namespace:app_desafio100dias.viewModels"
              x:Class="app_desafio100dias.NewChallenge"
              Title="Novo Desafio">
     <StackLayout Padding="20">
@@ -14,21 +15,25 @@
         <Button Text="Adicionar Evento" Clicked="OnAddEventClicked" Margin="5"/>
 
         <cal:Calendar Culture="{Binding Culture}"
-                  Events="{Binding Events}"
-                  SelectedDate="{Binding SelectedDate}"
-                  EventsScrollViewVisible="True"
-                  VerticalOptions="FillAndExpand"
-                  HorizontalOptions="FillAndExpand"
-                  CalendarLayout="Week">
+                      Events="{Binding Events}"
+                      SelectedDate="{Binding SelectedDate}"
+                      EventsScrollViewVisible="True"
+                      VerticalOptions="FillAndExpand"
+                      HorizontalOptions="FillAndExpand"
+                      CalendarLayout="Week">
 
             <cal:Calendar.EventTemplate>
                 <DataTemplate>
-                    <VerticalStackLayout>
-                        <Label Text="{Binding Name}" FontAttributes="Bold" />
-                        <Label Text="{Binding Description}" />
-                        <Label Text="{Binding StartDate, StringFormat='Início: {0:dd/MM/yyyy}'}" />
-                        <Label Text="{Binding EndDate, StringFormat='Fim: {0:dd/MM/yyyy}'}" />
-                    </VerticalStackLayout>
+                    <HorizontalStackLayout Margin="5">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" />
+                            <Label Text="{Binding Description}" />
+                            <Label Text="{Binding StartDate, StringFormat='Início: {0:dd/MM/yyyy}'}" />
+                            <Label Text="{Binding EndDate, StringFormat='Fim: {0:dd/MM/yyyy}'}" />
+                        </VerticalStackLayout>
+                        <Button Text="Editar" Margin="10"/>
+                        <Button Text="Excluir" Clicked="OnDeleteEventClicked" CommandParameter="{Binding .}" />
+                    </HorizontalStackLayout>
                 </DataTemplate>
             </cal:Calendar.EventTemplate>
         </cal:Calendar>

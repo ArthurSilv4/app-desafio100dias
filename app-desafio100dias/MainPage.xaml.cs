@@ -9,8 +9,7 @@ namespace app_desafio100dias
         public MainPage()
         {
             InitializeComponent();
-            viewModel = new CalendarViewModel();
-            BindingContext = viewModel;
+           
         }
 
         

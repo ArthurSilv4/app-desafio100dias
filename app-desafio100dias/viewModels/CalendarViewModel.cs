@@ -27,13 +27,26 @@ namespace app_desafio100dias.viewModels
             var eventList = Events[newEvent.eventDate] as List<EventModel>;
             eventList?.Add(newEvent);
         }
+
+        public void RemoveEvent(EventModel eventToRemove)
+        {
+            if (Events.ContainsKey(eventToRemove.eventDate))
+            {
+                var eventList = Events[eventToRemove.eventDate] as List<EventModel>;
+                eventList?.Remove(eventToRemove);
+                if (eventList != null && eventList.Count == 0)
+                {
+                    Events.Remove(eventToRemove.eventDate);
+                }
+            }
+        }
     }
 
-    internal class EventModel
+    public class EventModel
     {
-        public Guid Id { get; private set; }
-        public string? Name { get; set; }
-        public string? Description { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string ?Name { get; set; }
+        public string ?Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime eventDate { get; set; }
         public DateTime EndDate { get; set; }
