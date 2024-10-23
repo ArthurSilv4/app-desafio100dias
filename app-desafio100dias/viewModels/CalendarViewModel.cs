@@ -40,13 +40,29 @@ namespace app_desafio100dias.viewModels
                 }
             }
         }
+
+        public void UpdateEvent(EventModel updatedEvent)
+        {
+            if (Events.ContainsKey(updatedEvent.eventDate))
+            {
+                var eventList = Events[updatedEvent.eventDate] as List<EventModel>;
+                var existingEvent = eventList?.FirstOrDefault(e => e.Id == updatedEvent.Id);
+                if (existingEvent != null)
+                {
+                    existingEvent.Name = updatedEvent.Name;
+                    existingEvent.Description = updatedEvent.Description;
+                    existingEvent.StartDate = updatedEvent.StartDate;
+                    existingEvent.EndDate = updatedEvent.EndDate;
+                }
+            }
+        }
     }
 
     public class EventModel
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string ?Name { get; set; }
-        public string ?Description { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime eventDate { get; set; }
         public DateTime EndDate { get; set; }
