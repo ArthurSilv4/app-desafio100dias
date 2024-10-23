@@ -5,15 +5,16 @@
              xmlns:viewModels="clr-namespace:app_desafio100dias.viewModels"
              x:Class="app_desafio100dias.NewChallenge"
              Title="Novo Desafio">
-    <StackLayout Padding="20">
+    
+    <StackLayout Padding="10">
 
         <Entry x:Name="eventName" Placeholder="Nome do Evento" />
         <Editor x:Name="eventDescription" Placeholder="Descrição" />
         <DatePicker x:Name="startDate" DateSelected="OnStartDateChanged" />
         <DatePicker x:Name="endDate" IsEnabled="False" />
 
-        <Button Text="Adicionar Evento" Clicked="OnAddEventClicked" Margin="5" x:Name="addEventButton"/>
-        <Button Text="Salvar Alterações" Clicked="OnSaveChangesClicked" Margin="5" IsVisible="False" x:Name="saveChangesButton"/>
+        <Button Text="Adicionar Evento" Clicked="OnAddEventClicked" Margin="5" x:Name="addEventButton" BackgroundColor="Green"/>
+        <Button Text="Salvar Alterações" Clicked="OnSaveChangesClicked" Margin="5" IsVisible="False" x:Name="saveChangesButton" />
 
         <cal:Calendar Culture="{Binding Culture}"
                       Events="{Binding Events}"
@@ -22,19 +23,24 @@
                       VerticalOptions="FillAndExpand"
                       HorizontalOptions="FillAndExpand"
                       CalendarLayout="Week">
-
             <cal:Calendar.EventTemplate>
                 <DataTemplate>
-                    <HorizontalStackLayout Margin="5">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Name}" FontAttributes="Bold" />
-                            <Label Text="{Binding Description}" />
-                            <Label Text="{Binding StartDate, StringFormat='Início: {0:dd/MM/yyyy}'}" />
-                            <Label Text="{Binding EndDate, StringFormat='Fim: {0:dd/MM/yyyy}'}" />
-                        </VerticalStackLayout>
-                        <Button Text="Editar" Margin="10" Clicked="OnEditEventClicked" CommandParameter="{Binding .}"/>
-                        <Button Text="Excluir" Clicked="OnDeleteEventClicked" CommandParameter="{Binding .}" />
-                    </HorizontalStackLayout>
+                    <Frame BorderColor="BlueViolet" Margin="0,0,0,10">
+                        <ScrollView Orientation="Horizontal">
+                            <HorizontalStackLayout Spacing="130">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Description}" LineBreakMode="TailTruncation" MaxLines="5" HorizontalOptions="FillAndExpand"/>
+                                    <Label Text="{Binding StartDate, StringFormat='Início: {0:dd/MM/yyyy}'}" />
+                                    <Label Text="{Binding EndDate, StringFormat='Fim: {0:dd/MM/yyyy}'}" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Spacing="10" HorizontalOptions="End">
+                                    <Button Text="Editar" Clicked="OnEditEventClicked" CommandParameter="{Binding .}" WidthRequest="70" HeightRequest="40"/>
+                                    <Button Text="Excluir" Clicked="OnDeleteEventClicked" CommandParameter="{Binding .}" WidthRequest="70" HeightRequest="40" BackgroundColor="Red"/>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </ScrollView>
+                    </Frame>
                 </DataTemplate>
             </cal:Calendar.EventTemplate>
         </cal:Calendar>
