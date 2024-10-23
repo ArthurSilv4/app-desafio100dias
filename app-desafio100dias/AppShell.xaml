@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="app_desafio100dias.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:app_desafio100dias"
+    Shell.FlyoutBehavior="Flyout"
+    Title="app_desafio100dias">
+
+    <Shell.FlyoutHeader>
+        <HorizontalStackLayout>
+            <Image Source="dotnet_bot.pngs" WidthRequest="100"></Image>
+            <Label 
+                Text="Menu" FontSize="Title" FontAttributes="Bold" VerticalTextAlignment="Center">
+            </Label>
+        </HorizontalStackLayout>
+    </Shell.FlyoutHeader>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions=".38*, .78*" RowDefinitions="*,*,*" RowSpacing="10" ColumnSpacing="10">
+                <HorizontalStackLayout Grid.Row="0" Spacing="10" >
+                    <Image Source="{Binding FlyoutIcon}" WidthRequest="50" HeightRequest="50"></Image>
+                    <Label Text="{Binding Title}" VerticalOptions="Center">
+                    </Label>
+                </HorizontalStackLayout>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <FlyoutItem Title="Inicio" FlyoutDisplayOptions="AsSingleItem" Icon="dotnet_bot.png">
+        <ShellContent
+            Title="Inicio"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" 
+            Icon="dotnet_bot.png"    
+        />
+
+        <ShellContent
+            Title="Novo Desafio"
+            ContentTemplate="{DataTemplate local:NewChallenge}"
+            Route="NewChallenge" 
+            Icon="dotnet_bot.png"   
+        />
+
+        <ShellContent
+            Title="Missions"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" 
+            Icon="dotnet_bot.png"    
+        />
+    </FlyoutItem>
+
+    
+    <!--<FlyoutItem Title="Plans" FlyoutDisplayOptions="AsSingleItem" Icon="dotnet_bot.png">
+        <ShellContent
+            Title="Missions"
+            ContentTemplate="{DataTemplate local:createdTask}"
+            Route="createdTask" 
+        />
+    </FlyoutItem>
+
+    <FlyoutItem Title="About"  FlyoutDisplayOptions="AsSingleItem" Icon="dotnet_bot.png">
+        <ShellContent
+            Title="About"
+            ContentTemplate="{DataTemplate local:createdTask}"
+            Route="createdTask" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Config" FlyoutDisplayOptions="AsSingleItem" Icon="dotnet_bot.png">
+        <ShellContent
+            Title="Missions"
+            ContentTemplate="{DataTemplate local:createdTask}"
+            Route="createdTask" />
+    </FlyoutItem>-->  
+
+
+    <Shell.FlyoutFooter>
+        <HorizontalStackLayout>
+            <VerticalStackLayout>
+                <Label 
+                    Text="V1.0.0" 
+                    FontSize="Caption" 
+                    VerticalTextAlignment="Start" 
+                    HorizontalTextAlignment="Start">
+                </Label>
+                <Label 
+                    Text="Powered by ARTHUR SOUZA" 
+                    FontSize="Caption" 
+                    VerticalTextAlignment="Center" 
+                    HorizontalTextAlignment="Center">
+                </Label>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+    </Shell.FlyoutFooter>
+
+
+</Shell>
